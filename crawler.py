@@ -34,8 +34,15 @@ class SeleniumCrawler(object):
         monthly_element = self.driver.find_element_by_id("paymonthly")
         monthly_element.click()
 
+    def get_table_data(self):
+        """Get's the table with the tarif information and prints the price"""
+        table = self.driver.find_element_by_id("standardRatesTable")
+        for element in table:
+            print(element)
+
 
 if __name__ == '__main__':
     crawler = SeleniumCrawler()
     crawler.test()
     crawler.get_tariff_information("Canada")
+    crawler.get_table_data()
