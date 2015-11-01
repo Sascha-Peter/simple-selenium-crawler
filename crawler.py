@@ -9,8 +9,6 @@
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 
 
 class SeleniumCrawler(object):
@@ -19,12 +17,12 @@ class SeleniumCrawler(object):
     def __init__(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(10)
-        self.country_list = ["Canada"]
+        self.country_list = ["Canada", "Germany", "Iceland", "Pakistan",
+                             "Singapore", "South Africa"]
 
     def test(self):
         self.driver.get("http://international.o2.co.uk/internationaltariffs/" +
                         "calling_abroad_from_uk")
-        print(self.driver.title)
 
     def get_tariff_information(self, country):
         """Finds the country input element and searches for the given
@@ -38,15 +36,17 @@ class SeleniumCrawler(object):
         monthly_element.click()
 
     def get_table_data(self):
-        """Get's the table with the tarif information and prints the price"""
+        """Gets the table with the pricing information and prints the landline
+        tariff value
+        """
         table = self.driver.find_element_by_id("standardRatesTable")
         child_elements = table.find_elements_by_xpath('.//td')
-        for element in child_elements:
-            print(element.text)
+        print(child_elements[1].text)
 
 
 if __name__ == '__main__':
     crawler = SeleniumCrawler()
     crawler.test()
-    crawler.get_tariff_information("Canada")
-    crawler.get_table_data()
+    for country in crawler.country_list:
+        crawler.get_tariff_information(country)
+        crawler.get_table_data()
