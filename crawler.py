@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-"""This file contains the selenium web crawler and it's logic
+"""This file contains the selenium web crawler for simple web scraping
 
 @author: Sascha Peter <sascha.o.peter@gmail.com>
-@version: 0.1.0-alpha
+@version: 0.1.0
 @since: 2015-11-01
 """
 
