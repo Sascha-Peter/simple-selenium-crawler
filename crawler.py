@@ -9,6 +9,8 @@
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 class SeleniumCrawler(object):
@@ -16,6 +18,7 @@ class SeleniumCrawler(object):
 
     def __init__(self):
         self.driver = webdriver.Firefox()
+        self.driver.implicitly_wait(10)
         self.country_list = ["Canada"]
 
     def test(self):
@@ -37,8 +40,9 @@ class SeleniumCrawler(object):
     def get_table_data(self):
         """Get's the table with the tarif information and prints the price"""
         table = self.driver.find_element_by_id("standardRatesTable")
-        for element in table:
-            print(element)
+        child_elements = table.find_elements_by_xpath('.//td')
+        for element in child_elements:
+            print(element.text)
 
 
 if __name__ == '__main__':
