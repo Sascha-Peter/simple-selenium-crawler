@@ -3,8 +3,10 @@
 """This file contains the selenium web crawler for simple web scraping
 
 @author: Sascha Peter <sascha.o.peter@gmail.com>
-@version: 0.1.0
+@version: 0.1.1
 @since: 2015-11-01
+
+@change: 0.1.1 - Put url into __init__() method and delete test method
 """
 
 from selenium import webdriver
@@ -19,8 +21,6 @@ class SeleniumCrawler(object):
         self.driver.implicitly_wait(10)
         self.country_list = ["Canada", "Germany", "Iceland", "Pakistan",
                              "Singapore", "South Africa"]
-
-    def test(self):
         self.driver.get("http://international.o2.co.uk/internationaltariffs/" +
                         "calling_abroad_from_uk")
 
@@ -46,7 +46,6 @@ class SeleniumCrawler(object):
 
 if __name__ == '__main__':
     crawler = SeleniumCrawler()
-    crawler.test()
     for country in crawler.country_list:
         crawler.get_tariff_information(country)
         crawler.get_table_data()
